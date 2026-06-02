@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: baba-portfolio-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -k uvicorn.workers.UvicornWorker app.main:app
