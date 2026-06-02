@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://dad-portfolio-rrdc.onrender.com';
 
 /**
  * Fetch ordered list of music tracks from backend.
