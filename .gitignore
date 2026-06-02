@@ -15,6 +15,21 @@ node_modules/
 backend/.env
 frontend/.env
 *.env.local
+*.env
+*.env.*
+!.env.example
+!backend/.env.example
+!frontend/.env.example
+
+# Secret-like files
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.jks
+credentials.json
+secrets.json
 
 # Build outputs
 frontend/dist/
