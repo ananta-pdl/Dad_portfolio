@@ -21,13 +21,13 @@ Deploy the Python backend on **[Render.com](https://render.com/)** as a **Web Se
    - **Build Command**: `pip install -r requirements.txt`
    - **Start Command**: `python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT`
 4. Click **Advanced** and add the following **Environment Variables**:
-   - `MONGODB_URI`: `mongodb+srv://apkanxo39_db_user:Z1TwQKWq5kKbJMfX@cluster0.ypxnipc.mongodb.net/`
-   - `DATABASE_NAME`: `baba_portfolio`
-   - `CLOUDINARY_CLOUD_NAME`: `ducdlgkcq`
-   - `CLOUDINARY_API_KEY`: `757315338238684`
-   - `CLOUDINARY_API_SECRET`: `rqIbAgUeLvk5Cvdc1CpvbH-kagU`
-   - `CLOUDINARY_MUSIC_FOLDER`: `samples/Gandharba_Music`
-   - `CLOUDINARY_PICTURES_FOLDER`: `samples/Gandharba_Picture`
+   - `MONGODB_URI`: 
+   - `DATABASE_NAME`: 
+   - `CLOUDINARY_CLOUD_NAME`:
+   - `CLOUDINARY_API_KEY`: 
+   - `CLOUDINARY_API_SECRET`: 
+   - `CLOUDINARY_MUSIC_FOLDER`: 
+   - `CLOUDINARY_PICTURES_FOLDER`: 
    - `CORS_ORIGINS`: `https://your-frontend-domain.vercel.app` *(update this with your Vercel URL once deployed!)*
 5. Click **Deploy Web Service**.
 
