@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { fetchMusicTracks } from '../services/api';
-import { Play, Pause, SkipForward, SkipBack, Volume2, Music, Disc, Calendar, Clock } from 'lucide-react';
+import { Play, Pause, SkipForward, SkipBack, Volume2, Music, Disc } from 'lucide-react';
 import './MusicLounge.css';
+
+const DEFAULT_TRACK_THUMBNAIL = 'https://res.cloudinary.com/ducdlgkcq/image/upload/v1780375240/baba_pic_lmk02i.jpg';
 
 export default function MusicLounge() {
   const [tracks, setTracks] = useState([]);
@@ -22,7 +24,15 @@ export default function MusicLounge() {
       try {
         setLoading(true);
         const data = await fetchMusicTracks();
-        setTracks(data);
+        const normalizedTracks = [...data]
+          .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+          .map((track, index) => ({
+            ...track,
+            title: `Okhaldhungaima ${index + 1}`,
+            order: index + 1,
+            cover_image_url: DEFAULT_TRACK_THUMBNAIL,
+          }));
+        setTracks(normalizedTracks);
         setError(null);
       } catch (err) {
         console.error(err);
@@ -123,7 +133,7 @@ export default function MusicLounge() {
     <div className="music-page container section">
       <h1 className="section-title font-serif">The Music Lounge</h1>
       <p className="section-subtitle">
-        Step into the archives. Revisit raw recordings, studio demos, and live acoustic tracklists sung and recorded by BABA.
+      मेरा गीतहरूको प्रस्तुति
       </p>
 
       {loading && (
@@ -159,11 +169,6 @@ export default function MusicLounge() {
               <div className="track-details">
                 <span className="now-playing-tag">Now Playing</span>
                 <h2 className="player-title font-serif">{currentTrack.title}</h2>
-                <div className="player-year">
-                  <Calendar size={14} />
-                  <span>{currentTrack.year}</span>
-                </div>
-                <p className="player-desc">{currentTrack.description}</p>
               </div>
             </div>
 
@@ -236,7 +241,6 @@ export default function MusicLounge() {
                     </button>
                     <div>
                       <h4 className="track-item-title">{track.title}</h4>
-                      <span className="track-item-year">{track.year}</span>
                     </div>
                   </div>
 
