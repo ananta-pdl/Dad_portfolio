@@ -12,7 +12,10 @@ class DatabaseManager:
     def connect(self):
         try:
             logger.info(f"Connecting to MongoDB at URI: {settings.mongodb_uri.split('@')[-1]}") # Log without credentials
-            self.client = AsyncIOMotorClient(settings.mongodb_uri)
+            self.client = AsyncIOMotorClient(
+                settings.mongodb_uri,
+                serverSelectionTimeoutMS=5000
+            )
             self.db = self.client[settings.database_name]
             logger.info("MongoDB client initialized successfully.")
         except Exception as e:
