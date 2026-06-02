@@ -1,7 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from app.models.gallery import GalleryResponse, GalleryCreate
 from app.database import get_db
-from app.services.cloudinary import get_resources_by_folder
+from app.services.cloudinary import get_resources_by_folder_robust
+from app.config import settings
 import logging
 import uuid
 from typing import Optional
@@ -107,9 +108,9 @@ async def get_gallery_items():
     
     # Try fetching Cloudinary items first
     try:
-        cloudinary_resources = get_resources_by_folder("samples/Gandharba_Picture")
+        cloudinary_resources = get_resources_by_folder_robust(settings.cloudinary_pictures_folder)
         if cloudinary_resources:
-            logger.info(f"Loaded {len(cloudinary_resources)} gallery items from Cloudinary folder 'samples/Gandharba_Picture'")
+            logger.info(f"Loaded {len(cloudinary_resources)} gallery items from Cloudinary folder '{settings.cloudinary_pictures_folder}'")
             cloudinary_items = [map_cloudinary_gallery(res, idx) for idx, res in enumerate(cloudinary_resources)]
             combined_items.extend(cloudinary_items)
     except Exception as e:

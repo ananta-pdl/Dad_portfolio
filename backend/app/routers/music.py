@@ -1,7 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from app.models.music import MusicResponse, MusicCreate
 from app.database import get_db
-from app.services.cloudinary import get_resources_by_folder
+from app.services.cloudinary import get_resources_by_folder_robust
+from app.config import settings
 import logging
 import uuid
 from typing import Optional
@@ -126,9 +127,9 @@ async def get_tracks():
     
     # Priority 1: Fetch from Cloudinary
     try:
-        cloudinary_resources = get_resources_by_folder("samples/Gandharba_Music")
+        cloudinary_resources = get_resources_by_folder_robust(settings.cloudinary_music_folder)
         if cloudinary_resources:
-            logger.info(f"Loaded {len(cloudinary_resources)} music tracks from Cloudinary folder 'samples/Gandharba_Music'")
+            logger.info(f"Loaded {len(cloudinary_resources)} music tracks from Cloudinary folder '{settings.cloudinary_music_folder}'")
             mapped_tracks = [map_cloudinary_track(res, idx) for idx, res in enumerate(cloudinary_resources)]
             # Sort by order
             mapped_tracks.sort(key=lambda t: t.order)

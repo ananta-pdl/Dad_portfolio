@@ -11,11 +11,11 @@ class Settings(BaseSettings):
     cloudinary_api_secret: str = "dummy_api_secret"
 
     # Cloudinary folder paths
-    cloudinary_music_folder: str = "Home/samples/Gandharba_Music"
-    cloudinary_pictures_folder: str = "Home/samples/Gandharba_picture"
+    cloudinary_music_folder: str = "samples/Gandharba_Music"
+    cloudinary_pictures_folder: str = "samples/Gandharba_picture"
 
-    # CORS configuration
-    cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000,http://127.0.0.1:3000"
+    # CORS configuration (set frontend domains here)
+    cors_origins: str = "https://dad-portfolio.vercel.app"
 
     @property
     def cors_origins_list(self) -> List[str]:
